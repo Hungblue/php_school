@@ -35,7 +35,7 @@ class Category extends \Core\Model
 
   public static function getAll()
   {
-    $sql = 'SELECT * FROM categories';
+    $sql = 'SELECT * FROM categories_product';
 
     $db = static::getDB();
     $stmt = $db->prepare($sql);

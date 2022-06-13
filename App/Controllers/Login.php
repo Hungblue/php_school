@@ -42,7 +42,12 @@ class Login extends \Core\Controller
 
             Flash::addMessage('Login successful');
 
-            $this->redirect(Auth::getReturnToPage());
+            // $this->redirect(Auth::getReturnToPage());
+            if(User::isAdmin($user)){
+                $this->redirect('/admin/home');
+            } else{
+                $this->redirect(Auth::getReturnToPage());
+            }
 
         } else {
 
