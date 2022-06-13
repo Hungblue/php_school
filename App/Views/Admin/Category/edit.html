@@ -1,0 +1,33 @@
+{% extends "Layouts/admin.html" %} {% block content %}
+<div class="container-fluid p-0">
+    <div class="card-header">
+        <h1 class="h3 mb-3"><strong>Edit/Update Category</strong></h1>
+    </div>
+
+    <div class="card-body">
+        <form action="/admin/update-category" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="">Tên</label>
+                    <input type="text" class="form-control" name="name" placeholder="" value="{{ category.name }}">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="">Slug</label>
+                    <input type="text" class="form-control" name="slug" placeholder="" value="{{ category.slug }}">
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="">Mô tả</label>
+                    <textarea class="form-control" row="3" name="description" placeholder="">{{ category.description }}</textarea>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button class="btn btn-primary" onclick="history.back(-1)">Quay lại</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+</div>{% endblock %}

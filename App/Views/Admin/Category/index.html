@@ -1,0 +1,35 @@
+{% extends "Layouts/admin.html"%} {% block content %}
+<div class="container-fluid p-0">
+
+    <h1 class="h3 mb-3"><strong>Category</strong> Dashboard</h1>
+
+    <a type="button" class="btn btn-success" href="/admin/add-category">Add New Category</a>
+
+    <div class="card-body text-center" style="padding-left: 0px">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tên</th>
+                    <th>Mô tả</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.description }}</td>
+                    <td>
+                        <a href="/admin/edit-category" class="btn btn-primary">Sửa</a>
+                        <a href="/admin/delete-category" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this category?')">Xóa</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>{% endblock %}
