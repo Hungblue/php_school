@@ -46,8 +46,8 @@ $router->add('admin/category', ['controller' => 'Admin\CategoryController', 'act
 $router->add('admin/add-category', ['controller' => 'Admin\CategoryController', 'action' => 'add']);
 $router->add('admin/insert-category', ['controller' => 'Admin\CategoryController', 'action' => 'insert']);
 $router->add('admin/edit-category', ['controller' => 'Admin\CategoryController', 'action' => 'edit']);
-$router->add('admin/update-category/{id}', ['controller' => 'Admin\CategoryController', 'action' => 'update']);
-$router->add('admin/delete-category/{id}', ['controller' => 'Admin\CategoryController', 'action' => 'delete']);
+$router->add('admin/update-category/{id:\d+}', ['controller' => 'Admin\CategoryController', 'action' => 'update']);
+$router->add('admin/delete-category/{id:\d+}', ['controller' => 'Admin\CategoryController', 'action' => 'delete']);
 
 //Product
 $router->add('admin/product', ['controller' => 'Admin\ProductController', 'action' => 'index']);

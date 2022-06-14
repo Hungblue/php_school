@@ -50,7 +50,7 @@ class CategoryController extends \Core\Controller
     }
 
     public function updateAction(){
-        
+
     }
 
     public function deleteAction(){
