@@ -144,7 +144,7 @@
                 </a>
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                    <img src="public/assets/uploads/avatar/avatar.jpg" class="avatar img-fluid rounded me-1" alt="avatar" /> <span class="text-dark">{{ current_user.name }}</span>
+                    <img src="public/assets/uploads/avatar/avatar.jpg" class="avatar img-fluid rounded me-1" alt="avatar" /> <span class="text-dark">???????????</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="/pages-profile"><i class="align-middle me-1"
@@ -160,13 +160,13 @@
                     <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i>
                         Trung tâm trợ giúp</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/logout" onclick="event.preventDefault();
+                    <a class="dropdown-item" href="logout" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                         Logout
                     </a>
 
-                    <form id="logout-form" action="/logout" method="POST" class="d-none">
-
+                    <form id="logout-form" action="logout" method="POST" class="d-none">
+                        @csrf
                     </form>
                 </div>
             </li>

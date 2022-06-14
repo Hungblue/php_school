@@ -20,7 +20,7 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = 'congnge_web';
+    const DB_NAME = '63it_php';
 
     /**
      * Database user
