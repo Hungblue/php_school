@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Core\View;
 use Core\Router;
 use App\Models\Category;
-
+use \App\Token;
 /**
  * Account controller
  *
@@ -30,30 +30,69 @@ class CategoryController extends \Core\Controller
 
     public function addAction()
     {
-        View::renderTemplate('Admin/Category/add.html');
+        if (isset($_POST['submit'])) {
+            $data['name'] = $_POST['name'];
+            $data['slug'] = $_POST['slug'];
+            if($data['slug'] == ''){
+                $data['slug'] = $data['name'];
+            }
+            $data['slug'] = vn_to_str($data['slug']);
+            $data['description'] = $_POST['description'];
+            $data['thumbnail'] = add_image('thumbnail')['image'];
+            if($data['thumbnail'] == ''){
+                $data['thumbnail'] = 'import-img.png';
+            }
+            Category::insert($data);
+            $this->redirect('/admin/category');
+
+        }else{
+            View::renderTemplate('Admin/Category/add.html');
+        }
+        
     }
 
-    public function insertAction()
-    {
-        $isInserted = Category::insert($_POST);
-        if ($isInserted)
-        {
+    // public function insertAction()
+    // {
+    //     $isInserted = Category::insert($_POST);
+    //     if ($isInserted)
+    //     {
+    //         $this->redirect('/admin/category');
+    //     }else
+    //     {
+    //         return false; 
+    //     }
+    // }
+
+    public function editAction(){
+        $data['id'] = $this->route_params['id'];
+        $category = Category::getById($data)[0];
+
+        if (isset($_POST['submit'])){
+            $data['name'] = $_POST['name'];
+            $data['slug'] = $_POST['slug'];
+            if($data['slug'] == ''){
+                $data['slug'] = $data['name'];
+            }
+            $data['slug'] = vn_to_str($data['slug']);
+            $data['description'] = $_POST['description'];
+            $data['thumbnail'] = add_image('thumbnail')['image'];
+            if($data['thumbnail'] == ''){
+                $data['thumbnail'] = $category->thumbnail;
+            }
+            Category::update($data);
             $this->redirect('/admin/category');
-        }else
-        {
-            return false; 
+        }else{
+            View::renderTemplate('Admin/Category/edit.html', ['category'=>$category]);
         }
     }
 
-    public function editAction(){
-        View::renderTemplate('Admin/Category/edit.html');
-    }
-
     public function updateAction(){
-
+        
     }
 
     public function deleteAction(){
-        
+        $data['id'] = $this->route_params['id'];
+        Category::delete($data);
+        $this->redirect('/admin/category');
     }
 }

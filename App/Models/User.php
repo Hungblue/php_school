@@ -177,23 +177,6 @@ class User extends \Core\Model
     }
 
     /**
-     //* isAdmin 
-     * Admin = 1, user = 0
-     *
-     * @param string $email email address
-     *
-     * @return mixed  The user object or false if isAdmin fails
-     */
-    public static function isAdmin($user)
-    {
-        if ($user->level == 1) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Find a user model by ID
      *
      * @param string $id The user ID
