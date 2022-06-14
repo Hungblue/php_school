@@ -21,51 +21,50 @@
                         <i class="fas fa-phone mr-2"></i> 0353090996
                     </li>
 
-                    <!-- <li class="text-center border-right text-white">
+                    <li class="text-center border-right text-white">
                         <a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
                             <i class="fas fa-sign-in-alt mr-2"></i> Log In </a>
                     </li>
                     <li class="text-center text-white">
                         <a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
                             <i class="fas fa-sign-out-alt mr-2"></i>Register </a>
-                    </li> -->
-                    {% if current_user %}
-                    <button class="dropdown" style="background: none;border: none;text-align: center;">
-                        <li class="btn dropdown-toggle" style="background:none; color:white" type="button"
-                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user-circle"></i>
-                            {{ current_user.name }}
-                        </li>
-                        <li class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="/profile/show">
-                                <i class="fas fa-user-circle"></i>
-                                {{ current_user.name }}
-                            </a>
-                            <a class="dropdown-item" href="/my-orders"><i
-                                    class="fas fa-cart-arrow-down"></i>
-                                My Orders</a>
-                            <a class="dropdown-item" href="/changepassword"><i
-                                    class="fas fa-user-circle"></i>
-                                Đổi mật khẩu</a>
-                            <a class="dropdown-item" href="/logout"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt"></i>
-                                Logout
-                            </a>
-                            <form id="logout-form" action="/logout" method="POST"
-                                class="d-none">
-                            </form>
-                        </li>
-                    </button> {% else %}
-
+                    </li>
+                    <!-- @if (Route::has('login')) -->
                     <li class="text-center border-right">
                         <a class="text-white" href="/login">Login</a>
                     </li>
-
+                    <!-- @endif @if (Route::has('register')) -->
                     <li class="text-center border-right">
-                        <a class="text-white" href="/signup/new">Register</a>
+                        <a class="text-white" href="/register">Register</a>
                     </li>
-                    {% endif %}
+                    <!-- @endif @else -->
+                    <button class="dropdown" style="background: none;border: none;text-align: center;">
+                            <li class="btn dropdown-toggle" style="background:none; color:white" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user-circle"></i>
+                                Nguyen Van Hung
+                            </li>
+                            <li class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/profile">
+                                    <i class="fas fa-user-circle"></i>
+                                    Nguyen Van Hung
+                                </a>
+                                <a class="dropdown-item" href="/my-orders"><i
+                                        class="fas fa-cart-arrow-down"></i>
+                                    My Orders</a>
+                                <a class="dropdown-item" href="/changepassword"><i
+                                        class="fas fa-user-circle"></i>
+                                    Đổi mật khẩu</a>
+                                <a class="dropdown-item" href="/logout"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Logout
+                                </a>
+                                <form id="logout-form" action="/logout" method="POST"
+                                    class="d-none">
+                                </form>
+                            </li>
+                        </button>
                 </ul>
                 <!-- //header lists -->
             </div>
