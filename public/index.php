@@ -38,7 +38,7 @@ $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 $router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'action' => 'reset']);
 $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
 
-$router->add('admin/home', ['controller' => 'Admin\Home', 'action' => 'index']);
+$router->add('admin/dashboard', ['controller' => 'Admin\Home', 'action' => 'index']);
 $router->add('admin/statistical', ['controller' => 'Admin\Statistical', 'action' => 'index']);
 
 //Category
