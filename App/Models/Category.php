@@ -11,7 +11,7 @@ class Category extends \Core\Model
      *
      * @var array
      */
-    public $errors = [];
+    // public $errors = [];
 
     /**
      * Class constructor
@@ -57,6 +57,26 @@ class Category extends \Core\Model
         return $stmt->fetchAll();
     }
 
+    public function getBySlug($data){
+        $sql = 'SELECT * FROM categories_product Where slug = :slug';
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':slug', $data['slug'], PDO::PARAM_STR);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function getBySlug2($data){
+        $sql = 'SELECT * FROM categories_product Where slug = :slug AND id != :id';
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':id', $data['id'], PDO::PARAM_INT);
+        $stmt->bindValue(':slug', $data['slug'], PDO::PARAM_STR);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function insert($data)
     {
         // $this->validate();
@@ -97,10 +117,26 @@ class Category extends \Core\Model
      *
      * @return void
      */
-    public function validate()
+    public function validateInsert($data)
     {
-        if ($this->name == '') {
-            $this->errors[] = 'Name is required';
+        $errors = [];
+        if ($data['name'] == '') {
+            $errors['name'] = 'Name is required';
         }
+        if(!empty(Category::getBySlug($data))){
+            $errors['slug'] = 'Category already exists';
+        }
+        return $errors;    
+    }
+    public function validateUpdate($data)
+    {
+        $errors = [];
+        if ($data['name'] == '') {
+            $errors['name'] = 'Name is required';
+        }
+        if(!empty(Category::getBySlug2($data))){
+            $errors['slug'] = 'Category already exists';
+        }
+        return $errors;    
     }
 }
