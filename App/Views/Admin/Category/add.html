@@ -12,12 +12,19 @@
                         <label for="">Tên</label>
                         <input type="text" class="form-control" name="name" placeholder="">
                         {% if errors %}
-                            validate_form($errors);
+                            <div class="alert alert-danger message-validation" role="alert">
+                                <strong>{{ errors['name'] }}</strong>
+                            </div>
                         {% endif %}
                     </div>
                     <div class="form-group">
                         <label for="">Slug</label>
                         <input type="text" class="form-control" name="slug" placeholder="">
+                        {% if errors %}
+                            <div class="alert alert-danger message-validation" role="alert">
+                                <strong>{{ errors['slug'] }}</strong>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <label for="">Mô tả</label>
@@ -29,6 +36,11 @@
                         <label>Hình ảnh</label>
                         <img id="avatar" class="thumbnail" width="auto" height="120px" src="/images/import-img.png">
                         <input id="img" type="file" name="thumbnail" class="form-control src_img">
+                        {% if errors %}
+                            <div class="alert alert-danger message-validation" role="alert">
+                                <strong>{{ errors['image'] }}</strong>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-md-12">

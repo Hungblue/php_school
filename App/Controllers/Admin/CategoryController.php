@@ -30,7 +30,7 @@ class CategoryController extends \Core\Controller
 
     public function addAction()
     {
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['submit'])){
             $data['name'] = $_POST['name'];
             $data['slug'] = $_POST['slug'];
             if($data['slug'] == ''){
@@ -42,8 +42,17 @@ class CategoryController extends \Core\Controller
             if($data['thumbnail'] == ''){
                 $data['thumbnail'] = 'import-img.png';
             }
-            Category::insert($data);
-            $this->redirect('/admin/category');
+            // validate
+            $errors = Category::validateInsert($data);
+            if(!empty(add_image('thumbnail')['error'])){
+               $errors['image'] = add_image('thumbnail')['error']; 
+            }
+            if(!empty($errors)){
+                View::renderTemplate('Admin/Category/add.html', ['errors'=> $errors]);
+            }else{
+                Category::insert($data);
+                $this->redirect('/admin/category');
+            }
 
         }else{
             View::renderTemplate('Admin/Category/add.html');
@@ -79,8 +88,19 @@ class CategoryController extends \Core\Controller
             if($data['thumbnail'] == ''){
                 $data['thumbnail'] = $category->thumbnail;
             }
-            Category::update($data);
+            
+            // validate
+            $errors = Category::validateUpdate($data);
+            if(!empty(add_image('thumbnail')['error'])){
+               $errors['image'] = add_image('thumbnail')['error']; 
+            }
+
+            if(!empty($errors)){
+                View::renderTemplate('Admin/Category/edit.html', ['category'=>$category, 'errors'=> $errors]);
+            }else{
+                Category::update($data);
             $this->redirect('/admin/category');
+            }
         }else{
             View::renderTemplate('Admin/Category/edit.html', ['category'=>$category]);
         }
