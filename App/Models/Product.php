@@ -29,17 +29,17 @@ class Product extends \Core\Model
         return $stmt->fetchAll();
     }
 
-    public function getById($data){
+    public static function getById($id){
         $sql = 'SELECT * FROM products Where id = :id AND is_active = 1';
         $db = static::getDB();
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(':id', $data['id'], PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
-    public function getLastProduct(){
+    public static function getLastProduct(){
         $sql = 'SELECT * FROM products Order BY id Desc Limit 1';
         $db = static::getDB();
         $stmt = $db->prepare($sql);
