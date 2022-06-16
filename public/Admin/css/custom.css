@@ -25,3 +25,7 @@
     font-size: 14px;
     padding: 7px !important;
 }
+.form-group.image img{
+    display: block;
+    margin-top: 5px;
+}

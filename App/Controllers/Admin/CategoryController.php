@@ -59,22 +59,9 @@ class CategoryController extends \Core\Controller
         }
         
     }
-
-    // public function insertAction()
-    // {
-    //     $isInserted = Category::insert($_POST);
-    //     if ($isInserted)
-    //     {
-    //         $this->redirect('/admin/category');
-    //     }else
-    //     {
-    //         return false; 
-    //     }
-    // }
-
     public function editAction(){
         $data['id'] = $this->route_params['id'];
-        $category = Category::getById($data)[0];
+        $category = Category::getById($data['id'])[0];
 
         if (isset($_POST['submit'])){
             $data['name'] = $_POST['name'];

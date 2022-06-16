@@ -46,16 +46,13 @@ $router->add('admin/category', ['controller' => 'Admin\CategoryController', 'act
 $router->add('admin/add-category', ['controller' => 'Admin\CategoryController', 'action' => 'add']);
 $router->add('admin/insert-category', ['controller' => 'Admin\CategoryController', 'action' => 'insert']);
 $router->add('admin/edit-category/{id:\d+}', ['controller' => 'Admin\CategoryController', 'action' => 'edit']);
-// $router->add('admin/update-category/{id}', ['controller' => 'Admin\CategoryController', 'action' => 'update']);
 $router->add('admin/delete-category/{id:\d+}', ['controller' => 'Admin\CategoryController', 'action' => 'delete']);
 
 //Product
 $router->add('admin/product', ['controller' => 'Admin\ProductController', 'action' => 'index']);
 $router->add('admin/add-product', ['controller' => 'Admin\ProductController', 'action' => 'add']);
-$router->add('admin/insert-product', ['controller' => 'Admin\ProductController', 'action' => 'insert']);
-$router->add('admin/edit-product', ['controller' => 'Admin\ProductController', 'action' => 'edit']);
-$router->add('admin/update-product/{id}', ['controller' => 'Admin\ProductController', 'action' => 'update']);
-$router->add('admin/delete-product/{id}', ['controller' => 'Admin\ProductController', 'action' => 'delete']);
+$router->add('admin/edit-product/{id:\d+}', ['controller' => 'Admin\ProductController', 'action' => 'edit']);
+$router->add('admin/delete-product/{id:\d+}', ['controller' => 'Admin\ProductController', 'action' => 'delete']);
 
 //User
 $router->add('admin/user', ['controller' => 'Admin\UserController', 'action' => 'index']);

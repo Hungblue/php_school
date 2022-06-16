@@ -32,28 +32,21 @@ class Category extends \Core\Model
     public static function getAll()
     {
         $sql = 'SELECT * FROM categories_product Where is_active = 1';
-
         $db = static::getDB();
         $stmt = $db->prepare($sql);
-        //$stmt->bindValue(':id', $id, PDO::PARAM_INT);
-
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-
         $stmt->execute();
-
         return $stmt->fetchAll();
     }
 
-    public static function getById($data){
-        $sql = 'SELECT * FROM categories_product Where id = :id';
+
+    public function getById($data){
+        $sql = 'SELECT * FROM categories_product Where id = :id AND is_active = 1';
         $db = static::getDB();
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(':id', $data['id'], PDO::PARAM_INT);
-
+        $stmt->bindValue(':id', $data, PDO::PARAM_INT);
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-
         $stmt->execute();
-
         return $stmt->fetchAll();
     }
 
@@ -79,7 +72,6 @@ class Category extends \Core\Model
 
     public static function insert($data)
     {
-        // $this->validate();
         $sql = 'INSERT INTO categories_product (name, slug, description, thumbnail , is_active) VALUES (:name, :slug, :description, :thumbnail, 1)';
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -91,7 +83,6 @@ class Category extends \Core\Model
     }
     public static function update($data)
     {
-        // $this->validate();
         $sql = 'UPDATE categories_product SET name = :name, slug = :slug, description = :description, thumbnail = :thumbnail WHERE id = :id';
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -104,7 +95,6 @@ class Category extends \Core\Model
     }
     public static function delete($data)
     {
-        // $this->validate();
         $sql = 'UPDATE categories_product SET is_active = 0 WHERE id = :id';
         $db = static::getDB();
         $stmt = $db->prepare($sql);
