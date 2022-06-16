@@ -2,8 +2,10 @@
 
 namespace App\Controllers\Frontend;
 
+use App\Auth;
 use Core\View;
 use App\Models\Product;
+use App\Models\ReviewProduct;
 
 
 /**
@@ -31,11 +33,23 @@ class HomeController extends \Core\Controller
 
     public function viewProductAction()
     {
-        $id = $this->route_params['id'];
-        $product = Product::getByID($id);
+        $user = Auth::getUser();
+        $user_id = $user->id;
+        
+        $product_id = $this->route_params['id'];
+        $product = Product::getByID($product_id);
 
-        // var_dump($product);
+        $rates = ReviewProduct::getByIdProduct($product_id);
+        $count_rate = count($rates);
+        //avg rate
+        $avg_rate = ReviewProduct::getAVGRate($product_id);
+        $format_rate = ceil($avg_rate->avg_rate);
+        
+        //
+        $user_rating = ReviewProduct::getRateUser($product_id, $user_id);
+        
+        // var_dump($user_rating);
         // die();
-        View::renderTemplate('frontend/products/view.html', ['product' => $product]);
+        View::renderTemplate('frontend/products/view.html', ['user_rating' => $user_rating, 'product' => $product, 'avg_rate' => $avg_rate->avg_rate, 'count_rate' => $count_rate, 'format_rate' => $format_rate]);
     }
 }
