@@ -39,6 +39,7 @@ class Category extends \Core\Model
         return $stmt->fetchAll();
     }
 
+
     public function getById($data){
         $sql = 'SELECT * FROM categories_product Where id = :id AND is_active = 1';
         $db = static::getDB();
@@ -49,7 +50,7 @@ class Category extends \Core\Model
         return $stmt->fetchAll();
     }
 
-    public function getBySlug($data){
+    public static function getBySlug($data){
         $sql = 'SELECT * FROM categories_product Where slug = :slug';
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -58,7 +59,7 @@ class Category extends \Core\Model
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    public function getBySlug2($data){
+    public static function getBySlug2($data){
         $sql = 'SELECT * FROM categories_product Where slug = :slug AND id != :id';
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -69,7 +70,7 @@ class Category extends \Core\Model
         return $stmt->fetchAll();
     }
 
-    public function insert($data)
+    public static function insert($data)
     {
         $sql = 'INSERT INTO categories_product (name, slug, description, thumbnail , is_active) VALUES (:name, :slug, :description, :thumbnail, 1)';
         $db = static::getDB();
@@ -80,7 +81,7 @@ class Category extends \Core\Model
         $stmt->bindValue(':thumbnail', $data['thumbnail'], PDO::PARAM_STR);
         return $stmt->execute();
     }
-    public function update($data)
+    public static function update($data)
     {
         $sql = 'UPDATE categories_product SET name = :name, slug = :slug, description = :description, thumbnail = :thumbnail WHERE id = :id';
         $db = static::getDB();
@@ -92,7 +93,7 @@ class Category extends \Core\Model
         $stmt->bindValue(':id', $data['id'], PDO::PARAM_INT);
         return $stmt->execute();
     }
-    public function delete($data)
+    public static function delete($data)
     {
         $sql = 'UPDATE categories_product SET is_active = 0 WHERE id = :id';
         $db = static::getDB();
@@ -106,7 +107,7 @@ class Category extends \Core\Model
      *
      * @return void
      */
-    public function validateInsert($data)
+    public static function validateInsert($data)
     {
         $errors = [];
         if ($data['name'] == '') {
@@ -117,7 +118,7 @@ class Category extends \Core\Model
         }
         return $errors;    
     }
-    public function validateUpdate($data)
+    public static function validateUpdate($data)
     {
         $errors = [];
         if ($data['name'] == '') {

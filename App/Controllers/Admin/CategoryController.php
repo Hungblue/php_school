@@ -103,9 +103,9 @@ class CategoryController extends \Core\Controller
         }
     }
 
-    // public function updateAction(){
+    public function updateAction(){
         
-    // }
+    }
 
     public function deleteAction(){
         $data['id'] = $this->route_params['id'];
