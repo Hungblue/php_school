@@ -455,6 +455,57 @@ class User extends \Core\Model
         return false;
     }
 
+    public function updateProfile2($data)
+    {
+
+        // Only validate and update the password if a value provided
+        if ($data['password'] != '') {
+            $password = $data['password'];
+        }
+
+        // $this->validate();
+
+        // if (empty($this->errors)) {
+
+            $sql = 'UPDATE users
+                    SET name = :name,
+                        phone = :phone,   
+                        address = :address,
+                        description = :description,
+                        thumbnail = :thumbnail';
+
+            // Add password if it's set
+            if (isset($password)) {
+                $sql .= ', password_hash = :password_hash';
+            }
+
+            $sql .= "\nWHERE id = :id";
+
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':name', $data['name'], PDO::PARAM_STR);
+            $stmt->bindValue(':phone', $data['phone'], PDO::PARAM_STR);
+            $stmt->bindValue(':address', $data['address'], PDO::PARAM_STR);
+            $stmt->bindValue(':description', $data['description'], PDO::PARAM_STR);
+            $stmt->bindValue(':thumbnail', $data['thumbnail'], PDO::PARAM_STR);
+            $stmt->bindValue(':id', $data['id'], PDO::PARAM_INT);
+
+            // Add password if it's set
+            if (isset($password)) {
+
+                $password_hash = password_hash($password, PASSWORD_DEFAULT);
+                $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+
+            }
+
+            return $stmt->execute();
+        // }
+
+        return false;
+    }
+
     //take all record
     public static function getAll(){
         $sql = 'SELECT * FROM users';

@@ -26,6 +26,7 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 session_start();
 
 
+
 /**
  * Routing
  */
@@ -56,8 +57,9 @@ $router->add('admin/delete-product/{id:\d+}', ['controller' => 'Admin\ProductCon
 
 //User
 $router->add('admin/user', ['controller' => 'Admin\UserController', 'action' => 'index']);
-$router->add('admin/view-user/{id}', ['controller' => 'Admin\UserController', 'action' => 'view']);
-
+$router->add('admin/user/add', ['controller' => 'Admin\UserController', 'action' => 'add']);
+$router->add('admin/view-user/{id:\d+}', ['controller' => 'Admin\UserController', 'action' => 'view']);
+$router->add('admin/user/profile', ['controller' => 'Admin\UserController', 'action' => 'profile']);
 //Order
 $router->add('admin/order', ['controller' => 'Admin\OrderController', 'action' => 'index']);
 $router->add('admin/view-order', ['controller' => 'Admin\OrderController', 'action' => 'view']);
