@@ -51,6 +51,13 @@
 
     {% include 'Layouts/inc/front-agile.html' %} {% include 'Layouts/inc/front-modal.html' %}{% include 'Layouts/inc/front-header-bot.html' %} {% include 'Layouts/inc/front-navbar.html' %}
     <div id="app">
+        <!-- message -->
+        {% for message in flash_messages %}
+        <div class="alert alert-{{ message.type }}">
+            {{ message.body }}
+        </div>
+        {% endfor %}
+
         <main class="py-4">
             {% block content %} {% endblock %}
         </main>

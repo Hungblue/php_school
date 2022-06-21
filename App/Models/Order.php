@@ -6,25 +6,34 @@ use PDO;
 
 class Order extends \Core\Model
 {
-  // public function __construct(){
-    
-  // }
+      /**
+     * Error messages
+     *
+     * @var array
+     */
+    // public $errors = [];
 
-  public static function getAll(){
-    $sql = 'SELECT * FROM orders';
+    /**
+     * Class constructor
+     *
+     * @param array $data  Initial property values (optional)
+     *
+     * @return void
+     */
+    public function __construct($data = [])
+    {
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        };
+    }
 
-    $db = static::getDB();
-    $stmt = $db->prepare($sql);
-    //$stmt->bindValue(':id', $id, PDO::PARAM_INT);
-
-    $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-
-    $stmt->execute();
-
-    return $stmt->fetchAll();
-  }
-
-  public static function getById(){
-    
-  }
+    public static function getAll()
+    {
+        $sql = 'SELECT * FROM orders Where is_active = 1';
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

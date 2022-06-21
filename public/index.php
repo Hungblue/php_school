@@ -56,7 +56,7 @@ $router->add('admin/delete-product/{id:\d+}', ['controller' => 'Admin\ProductCon
 
 //User
 $router->add('admin/user', ['controller' => 'Admin\UserController', 'action' => 'index']);
-$router->add('admin/view-user/{id}', ['controller' => 'Admin\UserController', 'action' => 'view']);
+$router->add('admin/view-user/{id:\d+}', ['controller' => 'Admin\UserController', 'action' => 'view']);
 
 //Order
 $router->add('admin/order', ['controller' => 'Admin\OrderController', 'action' => 'index']);
@@ -69,7 +69,18 @@ $router->add('admin/history-order', ['controller' => 'Admin\OrderController', 'a
 $router->add('home', ['controller' => 'Frontend\HomeController', 'action' => 'index']);
 //$router->add('view-category/{slug}', ['controller' => 'Frontend\HomeController', 'action' => 'index']);
 $router->add('product/{id:\d+}', ['controller' => 'Frontend\HomeController', 'action' => 'viewProduct']);
+$router->add('add-rating', ['controller' => 'Frontend\ReviewProductController', 'action' => 'insert']);
 
+$router->add('add-comment/{id:\d+}', ['controller' => 'Frontend\CommentProductController', 'action' => 'add']);
+$router->add('add-comment', ['controller' => 'Frontend\CommentProductController', 'action' => 'insert']);
+$router->add('edit-comment/{id:\d+}', ['controller' => 'Frontend\CommentProductController', 'action' => 'edit']);
+$router->add('update-comment', ['controller' => 'Frontend\CommentProductController', 'action' => 'update']);
+
+
+//   Route::get('add-review/{product_slug}/userreview', [ReviewController::class, 'add']);
+//   Route::post('add-review', [ReviewController::class, 'create']);
+//   Route::get('edit-review/{product_slug}/userreview', [ReviewController::class, 'edit']);
+//   Route::put('update-review', [ReviewController::class, 'update']);
 
 //laravel routes
 // Route::get('/', [FrontendController::class, 'index']);
