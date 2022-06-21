@@ -88,6 +88,18 @@ abstract class Controller
     }
 
     /**
+     * Redirect to a previous page
+     *
+     *
+     * @return void
+     */
+    public function back()
+    {
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    /**
      * Require the user to be logged in before giving access to the requested page.
      * Remember the requested page for later, then redirect to the login page.
      *

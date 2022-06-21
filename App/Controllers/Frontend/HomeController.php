@@ -6,6 +6,7 @@ use App\Auth;
 use Core\View;
 use App\Models\Product;
 use App\Models\ReviewProduct;
+use App\Models\CommentProduct;
 
 
 /**
@@ -48,8 +49,10 @@ class HomeController extends \Core\Controller
         //
         $user_rating = ReviewProduct::getRateUser($product_id, $user_id);
         
-        // var_dump($user_rating);
-        // die();
-        View::renderTemplate('frontend/products/view.html', ['user_rating' => $user_rating, 'product' => $product, 'avg_rate' => $avg_rate->avg_rate, 'count_rate' => $count_rate, 'format_rate' => $format_rate]);
+        //$comments = CommentProduct::getPagination(0, 5);
+
+        $comments = CommentProduct::getUserName(0,5);
+        
+        View::renderTemplate('frontend/products/view.html', ['comments' => $comments, 'user_rating' => $user_rating, 'product' => $product, 'avg_rate' => $avg_rate->avg_rate, 'count_rate' => $count_rate, 'format_rate' => $format_rate]);
     }
 }

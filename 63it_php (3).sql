@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 16, 2022 lúc 08:23 PM
+-- Thời gian đã tạo: Th6 21, 2022 lúc 11:28 AM
 -- Phiên bản máy phục vụ: 10.4.22-MariaDB
 -- Phiên bản PHP: 8.1.0
 
@@ -65,6 +65,29 @@ INSERT INTO `categories_product` (`id`, `name`, `slug`, `description`, `thumbnai
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `comment_product`
+--
+
+CREATE TABLE `comment_product` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `comment_product`
+--
+
+INSERT INTO `comment_product` (`id`, `user_id`, `product_id`, `comment`, `is_active`, `created_at`, `updated_at`) VALUES
+(0, 12, 1, 'aaaaaaaaaaaaaaaaa55577777777777', 1, '2022-06-20 14:31:25', '2022-06-20 14:31:25');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `customers`
 --
 
@@ -87,15 +110,23 @@ CREATE TABLE `customers` (
 
 CREATE TABLE `orders` (
   `id` int(10) UNSIGNED NOT NULL,
-  `total` decimal(18,0) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `message` text NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
-  `customer_id` int(10) UNSIGNED NOT NULL,
-  `is_active` tinyint(1) NOT NULL,
-  `create_at` timestamp NULL DEFAULT NULL,
-  `update_at` timestamp NULL DEFAULT NULL
+  `total` decimal(18,0) NOT NULL,
+  `message` text NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `create_at` timestamp NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `total`, `message`, `phone`, `address`, `status`, `is_active`, `create_at`, `update_at`) VALUES
+(1, 12, '20000000', 'aaaaaaaaaaaaa', '0353090996', 'Hong duong Thanh oai', 1, 1, '2022-06-19 10:14:44', '2022-06-19 10:14:44');
 
 -- --------------------------------------------------------
 
@@ -105,15 +136,22 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `order_detail` (
   `id` int(10) UNSIGNED NOT NULL,
-  `price` decimal(18,0) NOT NULL,
-  `quantity` int(10) NOT NULL,
-  `thumbnail` varchar(255) NOT NULL,
   `order_id` int(10) UNSIGNED NOT NULL,
   `product_id` int(10) UNSIGNED NOT NULL,
-  `is_active` tinyint(1) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `update_at` timestamp NULL DEFAULT NULL
+  `price` decimal(18,0) NOT NULL,
+  `quantity` int(10) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_detail`
+--
+
+INSERT INTO `order_detail` (`id`, `order_id`, `product_id`, `price`, `quantity`, `is_active`, `created_at`, `update_at`) VALUES
+(1, 1, 1, '8000000', 1, 1, '2022-06-19 10:17:49', '2022-06-19 10:17:49'),
+(2, 1, 2, '12000000', 1, 1, '2022-06-19 10:17:49', '2022-06-19 10:17:49');
 
 -- --------------------------------------------------------
 
@@ -147,8 +185,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `code`, `name`, `slug`, `price`, `sale_price`, `quantity`, `short_description`, `description`, `featured`, `trending`, `rate`, `sku`, `thumbnail`, `user_id`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, '11111', 'Samsung galaxy', 'samsung', '10000000', '9500000', 10, 'ajhjfafahf', 'aasfffffffffffffffaaaaaaaaaaaaaaaa', 1, 1, 1.2, 'ddddddddddddddddssssss', '1640704893.jpg', 12, 1, '2022-06-20 14:03:50', '2022-06-21 14:03:50'),
-(2, '333333333333', 'ip 15', 'ip', '15200000', '15000000', 4, 'aaaaa', 'ssssssssssssssssssssssssss', 1, 1, 2.4, 'aaaaaaaaaaa', '', 12, 1, '2022-06-01 14:13:18', '2022-06-13 14:13:18');
+(1, '11111', 'Samsung galaxy', 'samsung', '10000000', '9500000', 10, 'ajhjfafahf', 'aasfffffffffffffffaaaaaaaaaaaaaaaa', 1, 1, 1, 'ddddddddddddddddssssss', '1640704893.jpg', 12, 1, '2022-06-20 14:03:50', '2022-06-21 14:03:50'),
+(2, '333333333333', 'ip 15', 'ip', '15200000', '15000000', 4, 'aaaaa', 'ssssssssssssssssssssssssss', 1, 1, 2, 'aaaaaaaaaaa', '', 12, 1, '2022-06-01 14:13:18', '2022-06-13 14:13:18');
 
 -- --------------------------------------------------------
 
@@ -171,8 +209,7 @@ CREATE TABLE `remembered_logins` (
 CREATE TABLE `review_product` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
-  `comment` text NOT NULL,
-  `rate` double NOT NULL,
+  `rate` int(11) NOT NULL,
   `product_id` int(10) UNSIGNED NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `update_at` timestamp NULL DEFAULT NULL,
@@ -183,10 +220,10 @@ CREATE TABLE `review_product` (
 -- Đang đổ dữ liệu cho bảng `review_product`
 --
 
-INSERT INTO `review_product` (`id`, `user_id`, `comment`, `rate`, `product_id`, `is_active`, `update_at`, `created_at`) VALUES
-(1, 11, 'ngu', 3, 1, 1, NULL, NULL),
-(2, 12, 'khon', 5, 2, 1, NULL, NULL),
-(3, 12, 'ngu2', 4, 1, 1, NULL, NULL);
+INSERT INTO `review_product` (`id`, `user_id`, `rate`, `product_id`, `is_active`, `update_at`, `created_at`) VALUES
+(1, 11, 3, 1, 1, NULL, NULL),
+(2, 12, 4, 2, 1, NULL, NULL),
+(3, 12, 5, 1, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -239,6 +276,13 @@ ALTER TABLE `categories_product`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `comment_product`
+--
+ALTER TABLE `comment_product`
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Chỉ mục cho bảng `customers`
 --
 ALTER TABLE `customers`
@@ -249,7 +293,6 @@ ALTER TABLE `customers`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `customer_id` (`customer_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -307,13 +350,13 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -325,7 +368,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT cho bảng `review_product`
 --
 ALTER TABLE `review_product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
@@ -345,10 +388,16 @@ ALTER TABLE `categories_has_product`
   ADD CONSTRAINT `categories_has_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
+-- Các ràng buộc cho bảng `comment_product`
+--
+ALTER TABLE `comment_product`
+  ADD CONSTRAINT `comment_product_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `comment_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+--
 -- Các ràng buộc cho bảng `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --

@@ -35,7 +35,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary">Bình luận</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Bình luận</button>
                 </div>
             </form>
         </div>
@@ -139,11 +139,23 @@
                     <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                         Đánh giá sản phẩm
                     </button>
-                    <a href="/add-view/{{ product.id }}/userreview" class="btn btn-link">
+                    <a href="/add-comment/{{ product.id }}" class="btn btn-link">
                         Viết bình luận
                     </a>
                 </div>
 
+            </div>
+
+            <div class="row">
+                <div>
+                    <h3>Bình luận</h3>
+                    {% for comment in comments %}
+                    <div>
+                        <h5>{{ comment.name }}</h5>
+                        <p>{{ comment.comment }}</p>
+                        <hr>
+                    </div>{% endfor %}
+                </div>
             </div>
         </div>
     </div>
