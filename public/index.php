@@ -87,6 +87,10 @@ $router->add('cart', ['controller' => 'Frontend\CartController', 'action' => 'vi
 $router->add('checkout', ['controller' => 'Frontend\CheckoutController', 'action' => 'index']);
 //$router->add('cart', ['controller' => 'Frontend\CartController', 'action' => 'view']);
 
+
+$router->add('about', ['controller' => 'Frontend\AboutController', 'action' => 'index']);
+$router->add('contact', ['controller' => 'Frontend\ContactController', 'action' => 'index']);
+
 //   Route::get('checkout', [CheckoutController::class, 'index']);
 //   Route::post('place-order', [CheckoutController::class, 'placeOrder']);
 
