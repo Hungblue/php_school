@@ -1,0 +1,19 @@
+{% extends "Layouts/front.html" %} {% block title %} Edit your Review {% endblock %} {% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Đánh giá sản phẩm {{ product.name }}</h5>
+                    <form action="/update-comment" method="POST">
+                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                        <input type="hidden" name="product_id" value="{{ comment.product_id }}">
+                        <textarea class="form-control" name="comment" id="" cols="30" rows="5" placeholder="Write a review">{{ comment.comment }}</textarea>
+                        <button type="submit" class="btn btn-primary mt-3">Cập nhật đánh giá</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

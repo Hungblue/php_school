@@ -1,12 +1,12 @@
-<?php
+<?php 
 
 namespace App\Models;
 
 use PDO;
 
-class Order extends \Core\Model
+class Cart extends \Core\Model
 {
-      /**
+    /**
      * Error messages
      *
      * @var array
@@ -27,11 +27,12 @@ class Order extends \Core\Model
         };
     }
 
-    public static function getAll()
+    public static function getByUserId($user_id)
     {
-        $sql = 'SELECT * FROM orders Where is_active = 1';
+        $sql = 'SELECT * FROM carts WHERE user_id = :user_id';
         $db = static::getDB();
         $stmt = $db->prepare($sql);
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_STR);
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $stmt->execute();
         return $stmt->fetchAll();
