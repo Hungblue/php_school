@@ -83,6 +83,9 @@ $router->add('update-comment', ['controller' => 'Frontend\CommentProductControll
 
 
 $router->add('cart', ['controller' => 'Frontend\CartController', 'action' => 'view']);
+$router->add('add-to-cart', ['controller' => 'Frontend\CartController', 'action' => 'add']);
+$router->add('delete-cart-item', ['controller' => 'Frontend\CartController', 'action' => 'delete']);
+$router->add('update-cart', ['controller' => 'Frontend\CartController', 'action' => 'update']);
 
 $router->add('checkout', ['controller' => 'Frontend\CheckoutController', 'action' => 'index']);
 //$router->add('cart', ['controller' => 'Frontend\CartController', 'action' => 'view']);
