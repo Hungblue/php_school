@@ -26,6 +26,7 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 session_start();
 
 
+
 /**
  * Routing
  */
@@ -56,7 +57,10 @@ $router->add('admin/delete-product/{id:\d+}', ['controller' => 'Admin\ProductCon
 
 //User
 $router->add('admin/user', ['controller' => 'Admin\UserController', 'action' => 'index']);
+
+$router->add('admin/user/add', ['controller' => 'Admin\UserController', 'action' => 'add']);
 $router->add('admin/view-user/{id:\d+}', ['controller' => 'Admin\UserController', 'action' => 'view']);
+$router->add('admin/user/profile', ['controller' => 'Admin\UserController', 'action' => 'profile']);
 
 //Order
 $router->add('admin/order', ['controller' => 'Admin\OrderController', 'action' => 'index']);
@@ -67,6 +71,7 @@ $router->add('admin/history-order', ['controller' => 'Admin\OrderController', 'a
 /***************************Frontend */
 
 $router->add('home', ['controller' => 'Frontend\HomeController', 'action' => 'index']);
+
 //$router->add('view-category/{slug}', ['controller' => 'Frontend\HomeController', 'action' => 'index']);
 $router->add('product/{id:\d+}', ['controller' => 'Frontend\HomeController', 'action' => 'viewProduct']);
 $router->add('add-rating', ['controller' => 'Frontend\ReviewProductController', 'action' => 'insert']);
@@ -147,6 +152,7 @@ $router->add('checkout', ['controller' => 'Frontend\CheckoutController', 'action
 
 //   Route::get('send-mail', [MailController::class, 'sendEmail']);
 //   Route::post('info-send-mail', [MailController::class, 'info_mail']);
+
 
 
 

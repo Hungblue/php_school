@@ -1,0 +1,112 @@
+{% extends "Layouts/admin.html"%} {% block content %}
+<div class="container-fluid p-0">
+    <div class="card-header">
+        <h1 class="h3 mb-3"><strong>Add user</strong></h1>
+    </div>
+
+    <div class="card-body">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="">
+                        {% if errors %}
+                            <div class="alert alert-danger message-validation" role="alert">
+                                <strong>{{ errors['name'] }}</strong>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="">
+                        {% if errors %}
+                            <div class="alert alert-danger message-validation" role="alert">
+                                <strong>{{ errors['email'] }}</strong>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="">
+                        {% if errors %}
+                            <div class="alert alert-danger message-validation" role="alert">
+                                <strong>{{ errors['password'] }}</strong>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="">Price(VND)</label>
+                        <input type="number" class="form-control" name="price" min="0" step="1000" placeholder="">
+                        {% if errors %}
+                            <div class="alert alert-danger message-validation" role="alert">
+                                <strong>{{ errors['price'] }}</strong>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="">Sale price(VND)</label>
+                        <input type="number" class="form-control" name="sale_price" min="0" step="1000" placeholder="">
+                        {% if errors %}
+                            <div class="alert alert-danger message-validation" role="alert">
+                                <strong>{{ errors['sale_price'] }}</strong>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="">Quantity</label>
+                        <input type="number" class="form-control" name="qty" placeholder="" min="0" step="1">
+                        {% if errors %}
+                            <div class="alert alert-danger message-validation" role="alert">
+                                <strong>{{ errors['qty'] }}</strong>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="">SKU</label>
+                        <input type="text" class="form-control" name="sku" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <input type="checkbox" name="featured" value="1">
+                        <label for="">Featured</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="trending">
+                        <label for="">Trending</label>
+                    </div>
+                    <div class="form-group image">
+                        <label>Image</label>
+                        <img id="avatar" class="thumbnail" width="auto" height="120px" src="/images/import-img.png">
+                        <input id="img" type="file" name="thumbnail" class="form-control src_img">
+                        {% if errors %}
+                            <div class="alert alert-danger message-validation" role="alert">
+                                <strong>{{ errors['image'] }}</strong>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                        <label for="">Short describe</label>
+                        <textarea class="form-control" row="3" name="short_describe" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Describe</label>
+                        <textarea class="form-control" row="5" name="describe" placeholder=""></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary" name="submit">Add new</button>
+                    <button class="btn btn-primary" onclick="history.back(-1)">Back</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+</div>
+{% endblock %}
