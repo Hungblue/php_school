@@ -5,6 +5,7 @@ namespace App\Controllers\Frontend;
 use App\Auth;
 use Core\View;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\ReviewProduct;
 use App\Models\CommentProduct;
 
@@ -27,10 +28,16 @@ class HomeController extends \Core\Controller
      */
     public function indexAction()
     {
-        $products = Product::getAll();
-        // var_dump($products);
+        $categories = Category::getAll();
+
+        //group products by category
+        foreach ($categories as $item)
+        {
+            $product_category[$item->id] = Product::getByCategory($item->id);
+        }
+        // echo '<pre>' , var_dump($product_category) , '</pre>';
         // die();
-        View::renderTemplate('frontend/index.html', ['products' => $products]);
+        View::renderTemplate('frontend/index.html', ['product_category' => $product_category]);
     }
 
     public function viewProductAction()
