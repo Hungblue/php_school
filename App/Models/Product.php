@@ -87,6 +87,16 @@ class Product extends \Core\Model
         return $stmt->fetchAll();
     }
 
+    public static function getByCategory($category_id){
+        $sql = 'SELECT * FROM products INNER JOIN categories_has_product ON products.id = categories_has_product.product_id Where category_id = :category_id';
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
 
     public function insert($data)
     {

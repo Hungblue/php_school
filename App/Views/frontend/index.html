@@ -14,14 +14,11 @@
             <div class="agileinfo-ads-display col-lg-12">
                 <div class="wrapper">
                     <!-- first section -->
-                    @foreach (featured_products as item_product)
+                    {% for category in product_category %}
                     <div class="">
-
-                        <h3 class="heading-tittle text-center font-italic">{{ featured_products }}
-                        </h3>
                         <div class="row">
                             <div class="owl-carousel featured-theme owl-theme">
-                                @foreach (item_product as item)
+                                {% for item in category %}
                                 <div class="item">
                                     <div class="product-men mt-5">
                                         <div class="men-pro-item simpleCart_shelfItem">
@@ -29,11 +26,11 @@
                                                 <div style="height: 250px; vertical-align: middle; display: table-cell;">
                                                     <div>
 
-                                                        <img class="" src="/images/{{ product.thumbnail }}" alt="image1">
+                                                        <img class="" src="/images/{{ item.thumbnail }}" alt="image1">
                                                     </div>
                                                     <div class="men-cart-pro">
                                                         <div class="inner-men-cart-pro">
-                                                            <a href="/category/{{ item.category.slug }}/{{ item.slug }}" class="link-product-add-cart">Xem</a>
+                                                            <a href="/product/{{ item.id }}" class="link-product-add-cart">Xem</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -43,7 +40,7 @@
                                                     <a href="/single">{{ item.name }}</a>
                                                 </h4>
                                                 <div class="info-product-price my-2">
-                                                    <span class="item_price">{{ item.selling_price }}
+                                                    <span class="item_price">{{ item.sale_price }}
                                                                     đ</span>
                                                     <del></del>
                                                 </div>
@@ -51,11 +48,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    {% endfor %}
                     <!-- //first section -->
 
                 </div>
@@ -64,7 +61,7 @@
     </div>
 </div>
 <!-- //top products -->
-{% block scripts %}{% endblock %}
+{% endblock %} {% block scripts %}
 <script>
     $('.owl-carousel').owlCarousel({
         loop: true,
