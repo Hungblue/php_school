@@ -3,7 +3,6 @@
 namespace App\Controllers\Frontend;
 
 use Core\View;
-use App\Models\Product;
 
 
 /**
@@ -23,19 +22,6 @@ class HomeController extends \Core\Controller
      */
     public function indexAction()
     {
-        $products = Product::getAll();
-        // var_dump($products);
-        // die();
-        View::renderTemplate('frontend/index.html', ['products' => $products]);
-    }
-
-    public function viewProductAction()
-    {
-        $id = $this->route_params['id'];
-        $product = Product::getByID($id);
-
-        // var_dump($product);
-        // die();
-        View::renderTemplate('frontend/products/view.html', ['product' => $product]);
+        View::renderTemplate('frontend/index.html');
     }
 }

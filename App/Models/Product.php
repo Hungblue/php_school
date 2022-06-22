@@ -88,7 +88,6 @@ class Product extends \Core\Model
     }
 
 
-
     public function insert($data)
     {
         $sql = 'INSERT INTO products (code, name, slug, price, sale_price, quantity, short_description, description, featured, trending, sku, thumbnail, user_id, is_active) 
@@ -230,5 +229,4 @@ class Product extends \Core\Model
         }
         return $errors;    
     }
-
 }

@@ -14,32 +14,36 @@
             <div class="agileinfo-ads-display col-lg-12">
                 <div class="wrapper">
                     <!-- first section -->
-                    {% for product in products %}
+                    @foreach (featured_products as item_product)
                     <div class="">
+
+                        <h3 class="heading-tittle text-center font-italic">{{ featured_products }}
+                        </h3>
                         <div class="row">
                             <div class="owl-carousel featured-theme owl-theme">
+                                @foreach (item_product as item)
                                 <div class="item">
                                     <div class="product-men mt-5">
                                         <div class="men-pro-item simpleCart_shelfItem">
                                             <div class="men-thumb-item text-center">
                                                 <div style="height: 250px; vertical-align: middle; display: table-cell;">
                                                     <div>
-                                                        <!-- @php arrayImage = explode(',', item->image); @endphp -->
-                                                        <img class="" src="/assets/uploads/product/1640704893.jpg" alt="image1">
+                                                        @php arrayImage = explode(',', item->image); @endphp
+                                                        <img class="" src="/assets/uploads/product/' . arrayImage[0]" alt="image1">
                                                     </div>
                                                     <div class="men-cart-pro">
                                                         <div class="inner-men-cart-pro">
-                                                            <a href="/product/{{ product.id }}" class="link-product-add-cart">Xem</a>
+                                                            <a href="/category/{{ item.category.slug }}/{{ item.slug }}" class="link-product-add-cart">Xem</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="item-info-product text-center border-top mt-4">
                                                 <h4 class="pt-1">
-                                                    <a href="/single">{{ product.name }}</a>
+                                                    <a href="/single">{{ item.name }}</a>
                                                 </h4>
                                                 <div class="info-product-price my-2">
-                                                    <span class="item_price">{{ product.price }}
+                                                    <span class="item_price">{{ item.selling_price }}
                                                                     đ</span>
                                                     <del></del>
                                                 </div>
@@ -47,10 +51,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                    @endforeach
                     <!-- //first section -->
 
                 </div>
@@ -59,8 +64,7 @@
     </div>
 </div>
 <!-- //top products -->
-
-{% endblock %} {% block scripts %}
+{% block scripts %}{% endblock %}
 <script>
     $('.owl-carousel').owlCarousel({
         loop: true,
@@ -80,4 +84,5 @@
             }
         }
     })
-</script>{% endblock %}
+</script>
+{% endblock %}
