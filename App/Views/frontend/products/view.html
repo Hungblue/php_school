@@ -51,19 +51,19 @@
                         <div class="flexslider">
                             <ul class="slides">
 
-                                <li data-thumb="/assets/uploads/product/1640704893.jpg">
+                                <li data-thumb="/images/{{ product.thumbnail }}">
                                     <div class="thumb-image">
-                                        <img src="/assets/uploads/product/1640704893.jpg" data-imagezoom="true" class="img-fluid" alt="">
+                                        <img src="/images/{{ product.thumbnail }}" data-imagezoom="true" class="img-fluid" alt="">
                                     </div>
                                 </li>
-                                <li data-thumb="/assets/uploads/product/1640704893.jpg">
+                                <li data-thumb="/images/{{ product.thumbnail }}">
                                     <div class="thumb-image">
-                                        <img src="/assets/uploads/product/1640704893.jpg" data-imagezoom="true" class="img-fluid" alt="">
+                                        <img src="/images/{{ product.thumbnail }}" data-imagezoom="true" class="img-fluid" alt="">
                                     </div>
                                 </li>
-                                <li data-thumb="/assets/uploads/product/1640704893.jpg">
+                                <li data-thumb="/images/{{ product.thumbnail }}">
                                     <div class="thumb-image">
-                                        <img src="/assets/uploads/product/1640704893.jpg" data-imagezoom="true" class="img-fluid" alt="">
+                                        <img src="/images/{{ product.thumbnail }}" data-imagezoom="true" class="img-fluid" alt="">
                                     </div>
                                 </li>
 
@@ -117,8 +117,12 @@
                             <button type="button" class="btn btn-success me-3 addToWishlist float-start">Thêm vào danh
                                 sách yêu thích
                                 <i class="fa fa-heart"></i></button>
-                            <button type="button" class="btn btn-primary me-3 addToCartBtn float-start">Thêm vào giỏ
+                            <form action="/add-to-cart" method="POST">
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <input type="hidden" name="product_qty" value="1">
+                                <button type="submit" class="btn btn-primary me-3 float-start">Thêm vào giỏ
                                 hàng<i class="fa fa-shopping-cart"></i></button>
+                            </form>
                         </div>
                     </div>
                     <div class="col-md-12">
