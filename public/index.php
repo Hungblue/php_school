@@ -77,10 +77,21 @@ $router->add('edit-comment/{id:\d+}', ['controller' => 'Frontend\CommentProductC
 $router->add('update-comment', ['controller' => 'Frontend\CommentProductController', 'action' => 'update']);
 
 
-//   Route::get('add-review/{product_slug}/userreview', [ReviewController::class, 'add']);
-//   Route::post('add-review', [ReviewController::class, 'create']);
-//   Route::get('edit-review/{product_slug}/userreview', [ReviewController::class, 'edit']);
-//   Route::put('update-review', [ReviewController::class, 'update']);
+$router->add('cart', ['controller' => 'Frontend\CartController', 'action' => 'view']);
+
+$router->add('checkout', ['controller' => 'Frontend\CheckoutController', 'action' => 'index']);
+//$router->add('cart', ['controller' => 'Frontend\CartController', 'action' => 'view']);
+
+//   Route::get('checkout', [CheckoutController::class, 'index']);
+//   Route::post('place-order', [CheckoutController::class, 'placeOrder']);
+
+//   Route::get('cart', [CartController::class, 'viewcart']);
+//   Route::get('checkout', [CheckoutController::class, 'index']);
+//   Route::post('place-order', [CheckoutController::class, 'placeOrder']);
+
+//   Route::post('add-to-cart', [CartController::class, 'addProduct']);
+//   Route::post('delete-cart-item', [CartController::class, 'deleteProduct']);
+//   Route::post('update-cart', [CartController::class, 'updateCart']);
 
 //laravel routes
 // Route::get('/', [FrontendController::class, 'index']);

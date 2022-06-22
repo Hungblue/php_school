@@ -1,10 +1,8 @@
-@extends('layouts.front2')
+{% extends 'Layouts/front.html'%}
 
-@section('title')
-    Welcome to Shop
-@endsection
+{% block title %} Welcome to Shop {% endblock %}
 
-@section('content')
+{% block content %}
     <!-- page -->
     <div class="services-breadcrumb">
         <div class="agile_inner_breadcrumb">
@@ -116,4 +114,4 @@
         </div>
     </div>
     <!-- //testimonials -->
-@endsection
+{% endblock %}
